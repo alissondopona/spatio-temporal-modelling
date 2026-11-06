@@ -1,0 +1,361 @@
+---
+title: "Notas da Disciplina de Modelos Espaço-Temporais para dados Ecológicos"
+format: pdf
+editor: visual
+author: Alisson P. B. Dopona
+---
+
+## Aula 1 - 19/10/2026
+
+### Modelos lineares
+
+**O que é um modelo?**
+
+Um modelo é usado para descrever a relação entre duas ou mais variáveis. Todo modelo é definido por um conjunto de parâmetros.
+
+O modelo pode ser visto como uma máquina preditiva. Adicionamos um x e ele nos fornece um y.
+
+$$
+y=f(x|\theta)
+$$
+
+Neste caso, entramos com os valores de x, o modelo processa e fornece uma saída y:
+
+![](images/modelo-02.png){fig-align="center" width="260"}
+
+E o que difere um modelo matemático de um modelo estatístico?
+
+O resíduo (ou também chamado de erro), que é a variabilidade dos dados.
+
+$$
+y = f(x|\theta) + \epsilon
+$$
+
+Neste caso, o resíduo é o termo estocástico do modelo, enquanto os outros, em conjunto, são os termos determinístico. Outro exemplo é o seguinte modelo:
+
+$$
+y=a+bx
+$$
+
+Ele é um modelo matemático, porém ao adicionar o resíduo ($\epsilon$), se torna um modelo estatístico ao permitir integrar a variabilidde. A relação é descrita pelo modelo determinístico.
+
+$$
+y=a+bx+\epsilon
+$$
+
+Essa relação também é conhecida como Modelo Linear, e o modelo probabilístico dela é a da Distribuição Normal.
+
+Toda distribuição de probabilidade é descrita por dois parâmetros, com excessão da Poisson que é descrita por apenas um parâmetro.
+
+Os modelos tem três objetivos:
+
+- predizer;
+
+- descrever; e
+
+- inferir.
+
+> ***Predição pode ser importante, por exemplo, para avaliar a resposta de um determinado estoque.***
+
+Os Modelos Lineares são muito importante pois, dominando bem os seus conceitos, facilita na aprendizagem de modelos mais complexos que são extensões dos Modelos Lineares, como GLM, GAM, GLMM, GAMM, e os Modelos de Variação Latentes (MVL) que serão abordados durante a disciplina.
+
+Os MVL são modelos que permitem incluir estruturas de correlação.
+
+Voltando ao Modelo Linear, ele é um tipo de modelo de regressão, composto por dois parêmatros: $\beta_0$ e $\beta_1$, o primeiro sendo o intercepto (valor de y quando x é zero) e a inclinação (quanto que y muda ao mudar uma unidade de x).
+
+O termo linear se refere a como os parâmetros entram no modelo, e não em relação a forma da reta. Ou seja, a linearidade está no $\beta$, e não no x.
+
+Os modelos também podem ser expressos em matrizes. É através delas que eles são computados, e portanto, permite avançar em modelos mais avançados, ou fazer nosso próprio modelo.
+
+## Aula 2 - 20/10/2026
+
+A estatística bayesiana surgiu com o reverendo Thomas Bayes no século XVIII. Ele começou a desenvolver a teoria da probabilidade inversa com o intuito de provar a existência de Deus.
+
+Na estatística bayesiana, a inferência é realizada pelo Teorema de Bayes, e através dele, nossa hipótese a medida que vamos atualizando nossos dados.
+
+O teorema é:
+
+$$
+p(\theta|y)=\frac{p(y|\theta)·p(\theta)} {p(y)}
+$$
+
+Na estatística, o Theta ($\theta$) representa o parâmetro da distribuição. Dessa forma, o Teorema diz que a probabilidade da minha hipótese dado os meus dados, é igual a probabiliade dos meus dados dada a hipótese · a probabilidade da minha hipótese dividido pela probabilidade dos meus dados.
+
+Nessa equação, os termos representam:
+
+- $p(\theta|y)$: **Distribuição posterior**
+
+  Conhecimento atualizado sobre o parâmetro após observar os dados
+
+- $p(\theta)$: **Distribuição a priori**
+
+  Crença sobre o parâmetro populacional *antes* de observar os dados. Aqui é a peça chave do Teorema de Bayes, é onde incluímos informações externa ao nosso estudo, para tirarmos nossa inferencias da distribuição posterior.
+
+- $p(y|\theta)$: **Função de Verossimilhança**
+
+  Representa a evidência fornecida pelos dados sobre o parâmetro
+
+- $p(y)$: **Constante de Normalização**
+
+  Garante que a distribuição posterior seja probabilística
+
+Nós podemos resumir o Teorema de Bayes por essa equação:
+
+$$
+\underbrace{p(\theta \mid y)}_{\text{Posterior}}
+\propto
+\underbrace{p(y \mid \theta)}_{\text{Dados}}
+\cdot
+\underbrace{p(\theta)}_{\text{Priori}}
+$$
+
+Ou seja: a distribuição a posteriori é diretamente proporcional ao produto dos dados com o conhecimento pretérito, ou seja, a priori. Dessa forma não descartamos o conhecimento que já foi produzido no passado.
+
+### Métodos de inferência estatística: Frequentista vs. Bayesiana
+
+Marie sugeriu ler Descartes (discurso do método) para desenvolver a dúvida metódica: não acreditar no que é posto.
+
+O símbolo Theta ($\theta$) representa o conjunto de parâmetros. No caso dos Modelos Lineares há dois parâmetros: *intercepto* e *inclinação* $\theta$ = {$\beta_0$;$\beta_1$}
+
+A diferença entre as duas escolas estatísticas é como probabilidade é definida.
+
+A Frequentista a base é que *n* amostral tende ao infinito. Essa é o pressuposto de definição de probabilidade. O teste de hipótese, por exemplo, parte desse pressuposto, de que a hipótese nula é verdadeira.
+
+Essas ideias se alinham com a proposta de Karl Popper, de que a hipótese não pode ser provada, mas apenas falseada.
+
+Essa etapa é feita ao contrastar a hipótese repetidamente com experimentos. Se a hipótese se mantém, então ela vai ganhando confiabilidade.
+
+Dessa forma, não verificamos a hipótese, só a hipótese nula. O teste de hipótese reforça a evidência contra a hipótese nula.
+
+> ***Intervalo de confiança é mais robusto que o erro padrão***
+
+Porém, queremos saber a incerteza associada à hipótese, e não ao processo amostral (ou seja, qual a incerteza associada a amostragem), como é o caso da escola frequentista.
+
+Na Frequentista, nós contrastamos os dados com os parâmetros de distribuição.
+
+***Bayesiana***
+
+Na Bayesiana é o oposto, os dados são fixos e o que muda é os parâmetros. Neste caso, já não temos os intervalos de confiança, mas o intervalo de credibilidade.
+
+Essa escola é baseada no Teorema de Bayes:
+
+$$
+p(\theta|y)= \frac{p(y|\theta)·p(\theta)} {p(y)}
+$$
+
+Ele pode lido como:
+
+$$
+p(hipótese|dado)=\frac{p(dado|hipótese)·p(hipótese)}{p(dado)}
+$$
+
+Na abordagem bayesiana, podemos incluir o que sabemos. Isso descarta a necessidade de testar parâmetros que já sabemos. Por exemplo, sabemos que riqueza é influenciada pela temperatura, então não precisamos coletar e incluir como parâmetro.
+
+A bayesiana permite fazer isso ao incluir os parâmetros de distribuição chamado distribuição *priori*.
+
+Essa distribuição a priori é combinada com os dados para gerar a distribuição *posteriori*, e dessa forma, extrair os parâmetros que descrevem os dados.
+
+A distribuição a priori reflete diferentes graus de probabilidade, e dessa forma, colocamos incerteza no modelo.
+
+É muito importante deixar claro na metodologia como a *priori* foi escolhida.
+
+Há, basicamente, três tipos de distribuição a *priodi:*
+
+- Difusa: quando assumimos não saber nada sobre o fenômeno. Dessa forma, a distribuição a *posteiori* será igual da distribuição dos dados, dado que não sofrerá modificação. Neste caso, a vantagem está no poder superior de inferência.
+
+- Vagamente informada: Quando temos um conhecimento prévio sobre o parâmetro, mas ainda há um certo grau de incerteza. Ela pode causar pouco impacto na distribuição a *posteriori*, mas a modifica e oferece o poder superior de inferência.
+
+- Informativa: Quando temos um grau de conhecimento sobre o fenômeno. Pode haver uma mudança substâncial na distribuição a *posteriori*.
+
+> ***A priori pode ter mais impacto em dados com poucas amostras***
+
+### Métodos de inferência
+
+Na Bayesiana, o método mais comum de fazer inferência é através das Cadeias de Markov Monte Carlo (MCMC).
+
+A ideia básica consiste em gerar amostragem da distribuição *posteriori* que você ainda desconhece, mas ela existe, você já calculou, mas não conhece os parâmetros, o "jeitão" dela.
+
+Então começamos a amostrar vários pontos da distribuição. A amostragem acontece em locais que sabemos que a densidade dos dados é maior, e menos em locais que a densidade é menor.
+
+Até que chega um momento que amostramos suficientemente esse espaço da distribuição *posteriori* que ai geramos nossa estatística.
+
+Vamos aprofundar mais:
+
+1.  Escolhemos arbitrariamente um valor para nosso parâmetro ($\theta$);
+2.  Depois calculamos a densidade a *posteriori* (ou seja, a distribuição do meu dado mutiplicada pela priori);
+3.  Ai propomos um novo valor para $\theta$ e recalculamos novamente a densidade *posteriori* para esse parametros que definimos
+4.  Caso a probabilidade desse novo parâmetro for maior que o parâmetro do início ( $\theta_n$ \> $\theta_1$ ) então aceitamos esse novo parâmetro e começamos a explorar o espaço paramétrico a partir desse novo parâmetros.
+5.  Se a probabilidade (produto do dado com a priori) do novo parâmetro for menor do que decidimos inicialmente, então só aceitamos diante de uma probabilidade do meu dado for maior do que o valor escolhido arbirtrariamente na distribuição uniforme. Se não, rejeitamos o novo parâmetro.
+
+Esse processo é repetido 1000, 5000, 10000 vezes. Quanto mais vezes, mais precisa será a distribuição posterior.
+
+Um exemplo prático:
+
+Vamos supor que um pinguim tem peso 3:
+
+- **Dados:** 1 observação ($y=3$)
+
+  $y \sim N(\mu, \sigma = 1.5)$
+
+- **Priori:** $\mu \sim N(0, \sigma = 10³)$
+
+1.  Escolhemos um valor arbitrário para $\mu$
+
+    $\mu = 4.8$
+
+2.  Calculamos a função de densidade para este ponto. Ela é calculada como o produto da função de versossimilhança (dados) com a *priori* (não informativa). Uma forma de fazer isso na prática é com o código R abaixo.
+
+    $f(\mu_1) = L(\mu_1)·p(\mu_1)$
+
+    ```{r}
+    f_mu1 <- dnorm(3, mean = 4.8, sd = 1.5) * dnorm(4.8, mean = 0, sd = 1000)
+    f_mu1
+    ```
+
+3.  Propomos um novo valor para $\mu$ e calculamos a função de densidade
+
+    $\mu_2 = 4.2$
+
+    ```{r}
+    f_mu2 <- dnorm(3, mean = 4.2, sd = 1.5) * dnorm(4.2, mean = 0, sd = 1000)
+    f_mu2
+    ```
+
+4.  Comparamos o valor
+
+    ```{r}
+    f_mu2 > f_mu1
+    ```
+
+Como $f(\mu_2) > f(\mu_1)$ -\> Aceitamos $\mu_2$ como um ponto amostral da distribuição *posteriori*.
+
+A distribuição *posteriori* terá um banco de dados com a quantidade de linhas que corresponde a quantidade de simulações que corremos, com os valores para cada um dos parâmetros. Quanto mais amostrarmos, mais descrevemos melhor a distribuição *posteriori*.
+
+A Bayesiana não depende de cálculo integral para integrar a função posterior. A forma que encontraram foi de reamostragem no espaço paramétrico. Uma simples e que tem um impacto grande na estatística.
+
+Segundo o [video](https://www.youtube.com/watch?v=3qodjHRUxAo), podemos pensar o seguinte:
+
+Nós temos uma densidade de probabilidade e nos pedem para produzir um conjunto de amostras que parece vir dessa densidade. Uma estratégia é colocar mais amostras em locais onde a densidade é alta. Mas de vez em quando, colocamos poucas amostras em locais onde a densidade é baixa. A frequência disso depende de quão alta e baixa a densidade é.
+
+Podemos pensar na ideia de Markov Chain como uma cadeia que se "desencadeia" com um valor e que o próximo depende apenas do valor prévio.
+
+Vamos falar dos passos em que essa cadeia precisa para ser construída.
+
+Nós começamos com um ponto inicial que podemos chamar de $x$ e usamos $x$ para criar um *Kernel*, que basicamente é uma distribuição de probabilidade que nós sabemos como é a forma. Geralmente usam a Gaussian Kernel. Neste caso o $x$ fica no centro dessa distribuição. Então desenhamos uma amostra deste Kernel para produzir uma nova amostragem que chamamos $x'$. Agora nós temos duas opções:
+
+1.  Nós podemos ou adicionar $x'$ na cadeia; ou
+2.  Ou manter $x'$ para uma nova interação.
+
+Para tomar essa decisão, nós trazemos de volta a densidade alvo que nós queremos amostrar, e olhamos para os valores que correspondem a $x$ e $x'$. Com base neles, usamos um conjunto de regras para fazer a decisão.
+
+1.  A primeira fala que, se a densidade da $x'$ \> $x$ nós deveríamos aceitar;
+
+2.  Se for menor, nós deveríamos aceitar esse ponto com a probabilidade proporcional a quanto menos provável isso é:
+
+    $\frac{f(x')} {f(x)}$
+
+Uma forma simples de fazer isso, é amostrar uma amostra entr 0 e 1 e amostrar aceitar a amostra se ela for menor que o resultado da probabilidade proporcional.
+
+Em poucas palavras, a primeira regra permite amostrar áreas com maiores densidades, uma vez que valores aceitos nescessitam ser maiores. Já a segunda, garante que áreas com baixa densidade ainda aceitem algumas amostras.
+
+Mas temos alguns problemas, que é nosso tempo limitado de fazer amostragens infinitas, e temos que fazer amostragens finitas, o que pode impactar nossos dados.
+
+Podemos imaginar esse problema com uma densidade em que há uma variância muito pequena. Dessa forma, há uma grande chance dos primeiros pontos saírem fora da densidade.
+
+Neste caso podemos usar o Burn-in period, que é abrir mão do período inicial. Outra dica é o Thinning, que é configurar de quantas em quantas amostras é que iremos incluir em nossa simulação.
+
+## Aula 3 - 21/10/2026
+
+A priori informativa é pouco falada em cursos de estatística bayesiana. Não há, de uma maneira geral, muitas informações sobre como ela deve ser feita, e Marie ainda está integrando qual a melhor forma de fazer isso.
+
+Quando entramos em modelagem (estatística e ecológica) temos alguns processos que temos que pensar mais de uma vez, as vezes. Um desses é o caso da distribuição de probabilidade. Estamos usando a distribuição de probabilidade correta? Temos todas as covariáveis importantes para a modelagen.
+
+A estatística Bayesiana adiciona uma camada a mais ao impor a necessidade de pensar sobre as prioris. É importante pensar nisso para termos garantia de que estamos fazendo um bom modelo, uma vez que a *posteriori* de hoje pode ser a *priori* de amanhã.
+
+Na prática, quando vamos definir a *priori*, usando uma regressão linear simples com uma distribuição normal, temos que definir *priori* para os parâmetros do modelo:
+
+$$
+y=\beta_0+\beta_1x
+$$
+
+São eles descrevem a média da distribuição normal (?).
+
+> ***Dica de leitura: Artigo do Wesner and Pomeranz (2021)***
+
+Existe diversas formas para definir a *priori*. As mais tradicionais são de publicações de trabalhos originais, meta-análise e também de especialistas. Mas também quando temos domínio sobre o sistema ecológico (valores biológicos plausíveis, escala/magnitude compatível com os dados) e regularização (evitando valores extremos). No caso de trabalhos origináis ou meta análise, os dados da *priori* estão no *output* do modelo.
+
+> Parece que definimos a média e desvio padrão para os valores de beta0 e beta1. Dessa forma modificamos os valores de desvio padrão, ou variância, para impor os valores de incerteza sobre o parâmetro
+
+É um dos locais que é mais sujeito de crítica a respeito da subjetividade. Mas a prática científica também tem sua subjetividade. A própria escolha do *p-value* em 0.05 é subjetiva.
+
+Nós temos que avaliar a convergência das cadeias que geraram os parâmetros da *posteriori*, e para isso temos algumas métricas:
+
+- **Traceplot**: Se as cadeias apresentam boa mistura. Desejamos que ela seja como uma "largata de foto". Não tem uma cadeia que se destaca, e não tem tendência, elas possuem uma média constante.
+
+- $\hat{R}$: Se as cadeias convergiram para a mesma distruibuição. Idealmente menor que 1.1
+
+- **Effect Sample Size (ESS)**: Quantas amostras indepensentes temos efetivamente?
+
+Na construção do modelo bayesiano, usamos alguns parâmetros para rodar as cadeias:
+
+- **Número de interações**: quantas simulações queremos;
+
+- **Burn-in**: descarta as primeiras interações devido a maior chance de correlação; Isso porque, no início, os parâmetros estão muito próximos, e por isso, interações também ocorrem muito próximas e tem mais correlação;
+
+- **Thinning**: que basicamente armazena um ponto amostrado a cada x amostragem (nós determinamos o x). É uma forma de reduzir a autocorrelação nas cadeias.
+
+A distribuição *posteriori* é multivariada por natureza. Ao formar a *posteriori*, geramos um data frame com os parâmetros $\beta_0$ e $\beta_1$ que juntos, descrevem a média. A quantidade de parâmetros gerados na *posteriori* será a quantidade de retas de regressão, neste caso.
+
+Por exemplo, se tivermos 1000 interações, a *posteriori* irá gerar 1000 parâmetros $\beta_0$ e $\beta_1$. Então podemos gerar 1000 retas de regressão. Consequentemente, podemos ter 1000 valores diferentes da variável resposta $y$ devido a equações diferentes.
+
+É a partir da sobreposição das retas, é que definimos o Intervalo de Credibilidade.
+
+Uma das formas é olhar para uma seção da reta, por exemplo $\beta_0 = 0.5$, e olhamos para a fração do $\beta_1$, e assim, vemos os pontos formando uma distribuição. Dessa forma podemos estimar o IC para um valor particular do meu parâmetro ($\beta_0 = 0.5$).:
+
+![](images/clipboard-2657561009.png)
+
+Mas podemos também definir a média das médias. Neste caso, para cada região pegamos a média das médias, como fizemos anteriormente, mas para todos os pontos, e tiramos a média geral. Assim, temos temos a linha de tendência média:
+
+![](images/clipboard-3000081061.png)
+
+A partir dessa distribuição, podemos afirmar que tem uma probabilidade de 95% do meu parâmetro está contido nesse intervalo. É algo que não se pode falar na estatística frequentista.
+
+A partir dessa *posteriori* é que coletamos as informações para fazer todo o processo inferencial: predições ($\hat{y}(x)$) , teste de hipótese ($\beta > 0$) , análises post-hoc ($\beta_a - \beta_b$) , ajuste do modelo (R², MSE, MAE, etc).
+
+Um exemplo aplicado a ecologia de populações e muito utilizado na pesca é a estimativa do tamanho da primeira maturação. Ou seja, tamanho em qu 50% dos indivíduos estão sexualmente maduros (conhecido como L50). Essa medida surge da divisão de dois parâmetros da equação: $L50 = \frac {-\beta_0} {\beta_1}$ e se torna mais fácil em um contexto bayesiano.
+
+Nesse exemplo, podemos calcular separadamente para machos e fêmeas, e uma pergunta natural é: há diferença entre machos e fêmeas? E ai fazemos um post-hoc, que é basicamente pegar todos os valores L50 da fêmea, a distruibuição dela, e subtrai da distruibuição dos machos.
+
+Na distribuição posterior, basicamente tudo que é feito a partir dela é contagens.
+
+## Aula 4 - 22/10/2026
+
+### Modelos Mistos
+
+Modelos mistos são um grupo de modelos que contém efeitos fixos e efeitos aleatórios. na prática, eles se diferem sendo que, os efeitos fixos são as variáveis que queremos medir o efeito diretamente sobre a tendencia média do nosso processo ecológico. Já o efeito aleatório não entra diretamente no valor da média do modelo, mas sim como um parâmetro de variabilidade. Dessa forma, não teremos os parâmetros estimados para os efeitos aleatórios, apenas teremos um parâmetro de variância. Por exemplo. Pegando o modelo linear:
+
+$$
+y \sim N(\mu, \sigma^2)
+$$
+
+O foco do efeito fixo está na média $\mu$ e o foco do efeito aleatório está na variância $\sigma^2$.
+
+Um exemplo de como isso pode se aplicar é em fragmento. Os processos ecológicos atuam em diversas escalas, como espaço e tempo, e dessa forma, podemos esperar que fragmentos tenham processos ecológicos diferentes, e portanto, as espécies de uma comunidade em um determinado fragmento, será mais similar entre si do que em outros fragmentos, uma vez que os processos ecológicos que atuam sobre essas espécies são únicos dos indivíduos. Isso faz com que indivíduos de um mesmo fragmento tenham respostas mais similares.
+
+Pensar em como os organismos estão estruturados pois, dependendo do nível de estruturação, podemos ter uma quebra da independencia dos dados.
+
+Um exemplo temporal seria a vocalização de aves. Cada momento de gravação (geralmente as gravações acontecem em um intervalo, por exemplo 20 - 20 min) tem relação com outro momento. Por exemplo, as vocalizações de um momento é mais provável de ser mais similar com os momentos mais próximos (exemplo, vocalizações as 5:00 e 5:20 são mais similares do que 5:00 e 11:20).
+
+Isso se torna mais complexo quando juntamos as duas dimenções, como por exemplo avaliar os diferentes fragmentos ao longo do tempo.
+
+Podemos também pensar a nível taxonômico. Indivíduos da mesma espécie serão mais similares e tenderão a responder de maneira mais similar a certas forçantes externas, do que indivíduos de outra espécie.
+
+Um dado é estruturado quando as observações ($y_i$) estão organizadas em grupos/níveis hierárquicos ($k$). Dessa forma, cada grupo de observações ($y_ik$) compartilham características que geram dependência entre elas.
+
+Essas características quebram o principal pressuposto de um LM, GLM e GAM: independência, que significa que as observações não são correlacionadas.
+
+**Como solucionar a violação de independência?**
+
+Particionando a variância!
+
+PAREI NO MINUTO 19:59
