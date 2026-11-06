@@ -2,7 +2,7 @@
 
 Este repositório tem como objetivo apresentar o resultado da prática desenvolvida na disciplia de Modelagem Espaço-Temporal no R, ministrada pela Profª. Dra. Marie.
 
-A ideia é aplicar Estatística Bayesiana para modelar a biomassa do Tubarão-Azul (_Prionace glauca_) no espaço e no tempo. A partir dos resultados do melhor modelo, será realizado uma predição de biomassa para locais que não foram amostrados (i.e. interpolação).
+A ideia é aplicar Estatística Bayesiana para modelar a biomassa do Tubarão-Azul (_Prionace glauca_) no espaço e no tempo. A partir dos resultados do melhor modelo, foi realizado uma predição de biomassa para locais que não foram amostrados (i.e. interpolação).
 
 Abaixo, podemos observar como a biomassa de _Prionace glauca_ está distribuída ao longo do espaço e do tempo:
 
@@ -16,4 +16,6 @@ E em seguida, as predições realizada para o espaço e tempo de _Prionace glauc
   <img src= "Output/sp-distribution.gif" width="500">
 </p>
 
-E então, temos um gif animado.
+Dessa forma, obtivemos um .gif mostrando as mudanças espaço-temporais de abundância para toda a costa brasileira. 
+
+_Obs: Os dados utilizados aqui são dados simulados para fins didáticos_
