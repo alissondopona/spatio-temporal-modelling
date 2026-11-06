@@ -16,3 +16,4 @@ E em seguida, as predições realizada para o espaço e tempo de _Prionace glauc
   <img src="Output/sp-distribution.gif" width="500">
 </p>
 
+E então, temos um gif animado.
