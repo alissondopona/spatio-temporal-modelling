@@ -6,14 +6,14 @@ A ideia é aplicar Estatística Bayesiana para modelar a biomassa do Tubarão-Az
 
 Abaixo, podemos observar como a biomassa de _Prionace glauca_ está distribuída ao longo do espaço e do tempo:
 
-<p align="center>
-  <img src="Output/Prionace_glauca.png" width="500">
+<p align= "center">
+  <img src= "Output/Prionace_glauca.png" width="500">
 </p>
 
 E em seguida, as predições realizada para o espaço e tempo de _Prionace glauca_ na costa brasileira:
 
-<p align="center>
-  <img src="Output/sp-distribution.gif" width="500">
+<p align= "center">
+  <img src= "Output/sp-distribution.gif" width="500">
 </p>
 
 E então, temos um gif animado.
